@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "module": "esnext",
+        "target": "esnext",
+        "types": [],
+        "lib": ["ESNext"],
+        "sourceMap": true,
+        "declaration": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "strict": true,
+        "verbatimModuleSyntax": false,
+        "moduleResolution": "bundler",
+        "isolatedModules": true,
+        "skipLibCheck": true
+    },
+    "exclude": ["node_modules", "dist"]
+}
