@@ -40,7 +40,7 @@ export default {
         },
         messages: {
             type: "Select the type of change that you are committing:", // 选择更改类型
-            scope: "Select a scope (optional):", // 选择影响范围（可选）
+            scope: "Select a scope (optional):", // 选择影响范围（可选）--> empty:不影响，custom:自定义
             customScope: "Enter custom scope (optional):", // 自定义影响范围（可选）
             subject: "Write a short description of the change:\n", // 简要描述提交
             body: "Provide a longer description of the change (optional). Use '|' for new line:\n", // 详细描述
