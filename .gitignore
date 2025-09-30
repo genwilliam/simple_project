@@ -51,3 +51,5 @@ lerna-debug.log
 nx-report.json
 turbo/
 .cache/
+
+./apps/backend/smart-park-guat-server/src/main/resources/application.yml
