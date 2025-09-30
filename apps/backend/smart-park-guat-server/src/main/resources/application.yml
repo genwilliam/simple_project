@@ -11,7 +11,7 @@ spring:
     # 数据库用户名
     username: root
     # 数据库密码
-    password: 自己的密码
+    password: lian
 #驼峰命名
 mybatis:
   configuration:
