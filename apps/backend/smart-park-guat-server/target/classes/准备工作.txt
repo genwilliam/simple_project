@@ -1,0 +1,92 @@
+1.软件工具准备
+jdk1.8 
+https://www.oracle.com/cn/java/technologies/downloads/#java8-windows
+
+mysql8
+https://dev.mysql.com/downloads/installer/
+
+maven
+https://maven.apache.org/download.cgi
+
+idea
+https://www.jetbrains.com.cn/idea/download/?section=windows
+
+navicat
+https://www.navicat.com.cn/download/navicat-premium
+
+apipost
+https://www.apipost.cn/download.html
+
+
+2.数据库准备
+user 用户表
+id 用户ID 主键非空 自增
+user_name 用户名 非空
+password 用户密码 非空
+phone_number 手机号
+email 邮箱
+sex 性别 0女 1男
+status 账号状态 0停用 1启用
+
+
+3.依赖准备
+	<!-- MySQL连接器依赖，用于连接MySQL数据库 -->
+	<dependency>
+		<groupId>com.mysql</groupId>
+		<artifactId>mysql-connector-j</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+
+	<!-- MyBatis Starter -->
+	<dependency>
+		<groupId>org.mybatis.spring.boot</groupId>
+		<artifactId>mybatis-spring-boot-starter</artifactId>
+		<version>2.3.2</version>
+	</dependency>
+
+	<!-- Lombok依赖，用于简化Java代码，减少getter/setter等样板代码 -->
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<scope>provided</scope>
+	</dependency>
+
+	<!-- 【可选】 Fastjson2依赖，用于JSON序列化和反序列化 -->
+	<dependency>
+		<groupId>com.alibaba.fastjson2</groupId>
+		<artifactId>fastjson2</artifactId>
+		<version>2.0.29</version>
+	</dependency>
+
+
+4.配置准备
+# 设置服务器端口
+server:
+  port: 8080
+# 数据库连接配置
+spring:
+  datasource:
+    # MySQL数据库驱动类名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接URL，包含连接参数
+    url: jdbc:mysql://localhost:3306/platform_smart_park?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+    # 数据库用户名
+    username: root
+    # 数据库密码
+    password: 123456
+#驼峰命名
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+5.交互过程
+controller
+↓↑
+service
+↑↓
+mapper
+↓↑
+entity
+↑↓
+mysql

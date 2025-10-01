@@ -1,8 +1,0 @@
-{
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-		"types": [],
-		"lib": ["DOM", "ESNext"] // DOM library for browser environment
-	},
-	"include": ["src"]
-}

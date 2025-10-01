@@ -1,8 +1,0 @@
-{
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-		"types": ["node"],
-		"lib": ["ESNext"] // 覆盖LIB以避免包括DOM类型
-	},
-	"include": ["src"]
-}
