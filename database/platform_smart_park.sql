@@ -13,7 +13,8 @@
 
  Date: 18/09/2025 18:22:16
 */
-
+CREATE SCHEMA IF NOT EXISTS `platform_smart_park`;
+USE `platform_smart_park`;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
