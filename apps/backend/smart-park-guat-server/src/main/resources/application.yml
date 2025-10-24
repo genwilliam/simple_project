@@ -1,6 +1,7 @@
 # 设置服务器端口
 server:
   port: 8080
+  address: 0.0.0.0
 # 数据库连接配置
 spring:
   datasource:
