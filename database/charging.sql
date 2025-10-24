@@ -230,7 +230,6 @@ ORDER BY cr.collect_time DESC;
 # 4.2 告警统计视图
 CREATE OR REPLACE VIEW v_charging_alarm AS
 SELECT
-    ca.id AS 告警ID,
     ca.device_id AS 设备编号,
     ca.alarm_type AS 告警类型,
 #   ca.alarm_level AS 告警等级, 是否需要将阈值参考加入进来确认是什么等级
@@ -389,7 +388,7 @@ BEGIN
 
     IF NEW.temperature >= 60 THEN
         INSERT INTO charging_alarm(device_id, alarm_type, alarm_value, threshold, alarm_time)
-        VALUES (NEW.device_id, 'over_temp', NEW.temperature, 70, NEW.collect_time);
+        VALUES (NEW.device_id, 'over_temp', NEW.temperature, 60, NEW.collect_time);
     END IF;
 END//
 DELIMITER ;
