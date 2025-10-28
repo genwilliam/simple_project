@@ -17,6 +17,14 @@ const router = createRouter({
             title: '用户管理',
           },
         },
+        {
+          path: '/alert',
+          name: 'alert',
+          component: () => import('@/views/alert/index.vue'),
+          meta: {
+            title: '告警模块',
+          },
+        },
       ],
     },
     {
