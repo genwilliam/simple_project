@@ -1,5 +1,6 @@
 package cn.guat;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Smartpark应用程序主类
  * 这是Spring Boot应用程序的入口点，负责启动整个应用
  */
+@EnableScheduling
 @SpringBootApplication
 public class SmartparkApplication {
 
