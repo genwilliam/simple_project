@@ -1,6 +1,7 @@
 # 设置服务器端口
 server:
   port: 8080
+  address: 0.0.0.0
 # 数据库连接配置
 spring:
   datasource:
@@ -16,3 +17,12 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+#告警阈值
+alert:
+  threshold:
+    max-voltage: 300
+    max-temperature: 60
+    offline-minutes: 5
+    max-current: 50

@@ -29,4 +29,20 @@ public interface ChargingRealtimeMapper {
      */
     @Select("SELECT * FROM charging_realtime ORDER BY collect_time DESC LIMIT 20")
     List<ChargingRealtime> findRecent();
+
+    /**
+     * 查询所有充电实时数据
+     * @return 所有充电实时数据列表（List<ChargingRealtime>）
+     */
+    @Select("select * from charging_realtime")
+    public List<ChargingRealtime> findAll();
+
+    /**
+     * 根据ID查询充电实时数据
+     * @param id 充电实时数据ID
+     * @return 匹配的充电实时数据对象（ChargingRealtime），如果不存在则返回null
+     */
+    @Select("select * from charging_realtime where id = #{id}")
+    public ChargingRealtime findById(Long id);
 }
+

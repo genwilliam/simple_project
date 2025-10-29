@@ -7,11 +7,11 @@ spring:
     # MySQL数据库驱动类名
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 数据库连接URL，包含连接参数
-    url: jdbc:mysql://localhost:3306/platform_smart_park?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/charge?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
     # 数据库用户名
     username: root
     # 数据库密码
-    password: lian
+    password: Qaz369258147
 #驼峰命名
 mybatis:
   configuration:
