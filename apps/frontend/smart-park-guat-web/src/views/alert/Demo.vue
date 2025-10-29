@@ -2,7 +2,7 @@
   <div class="alert-wrapper" v-if="isVisible">
     <n-alert type="error" :title="title">
       <template #default>
-        <n-marquee>
+        <n-marquee :loop="true" :speed="50" :delay="0">
           <template #default>
             <div style="margin-right: 64px">{{ content }}</div>
           </template>
@@ -15,7 +15,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { deviceId } from '@/api/alert'
 
-const title = ref('加载中...')
+const title = ref('ID加载中...')
 const content = ref('设备告警信息加载中...')
 const isVisible = ref(true)
 let timer = null
@@ -29,7 +29,6 @@ onMounted(async () => {
     const alarms = res.data
 
     if (alarms && alarms.length > 0) {
-      // 初始化第一个告警
       title.value = `设备ID: ${alarms[0].deviceId}`
       content.value = `告警类型: ${alarms[0].alarmType} 等级: ${alarms[0].alarmLevel} 时间: ${alarms[0].alarmTime}`
 
@@ -52,7 +51,6 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  // 组件卸载时清除定时器
   if (timer) clearInterval(timer)
 })
 </script>
