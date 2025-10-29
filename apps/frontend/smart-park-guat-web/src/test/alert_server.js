@@ -11,7 +11,7 @@ app.get('/api/alarm', (req, res) => {
     msg: 'success',
     data: [
       {
-        deviceId: 'CP0002',
+        deviceId: 'CP0001',
         alarmType: 'over_current',
         alarmLevel: '普通',
         alarmTime: '2025-10-29T03:22:36.000+00:00',
@@ -19,8 +19,8 @@ app.get('/api/alarm', (req, res) => {
       },
       {
         deviceId: 'CP0002',
-        alarmType: 'over_current',
-        alarmLevel: '普通',
+        alarmType: '我要发财了',
+        alarmLevel: '危险',
         alarmTime: '2025-10-29T03:23:06.000+00:00',
         status: 0,
       },
