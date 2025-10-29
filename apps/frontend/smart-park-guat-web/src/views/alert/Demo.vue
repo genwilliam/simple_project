@@ -1,18 +1,22 @@
 <template>
   <div class="alert-wrapper">
     <n-alert type="error" :title="title">
-      <n-marquee>
-        <div style="margin-right: 64px">{{ content }}</div>
-      </n-marquee>
+      <template #default>
+        <n-marquee>
+          <template #default>
+            <div style="margin-right: 64px">{{ content }}</div>
+          </template>
+        </n-marquee>
+      </template>
     </n-alert>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const title = ref('damn')
-const content = ref('damn')
+const title = ref('错误告警')
+const content = ref('检测到设备离线，请检查连接状态。')
 </script>
 
 <style scoped>
@@ -22,5 +26,10 @@ const content = ref('damn')
   right: 20px;
   z-index: 9999;
   width: 350px;
+}
+
+.marquee-content {
+  margin-right: 64px;
+  white-space: nowrap;
 }
 </style>
