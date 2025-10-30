@@ -7,6 +7,8 @@ import cn.guat.smartpark.common.TcpDeviceClient.DeviceData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,10 +42,10 @@ public class DataCollectorService {
                 record.setStatus(3);
             } else {
                 record.setStatus(data.getStatus());
-                record.setVoltage(data.getVoltage());
-                record.setCurrent(data.getCurrent());
-                record.setPower(data.getPower());
-                record.setTemperature(data.getTemperature());
+                record.setVoltage(new BigDecimal(data.getVoltage()));
+                record.setCurrent(new BigDecimal(data.getCurrent()));
+                record.setPower(new BigDecimal(data.getPower()));
+                record.setTemperature(new BigDecimal(data.getTemperature()));
             }
 
             realtimeMapper.insert(record);

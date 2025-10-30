@@ -11,7 +11,6 @@ const request = axios.create({
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
   },
-
 })
 // request拦截器
 request.interceptors.request.use(
@@ -24,18 +23,17 @@ request.interceptors.request.use(
     // }
     return config
   },
-  (error) => {
-    return Promise.reject(error)
-  },
+  (error) => Promise.reject(error),
 )
-//响应拦截器
+// response拦截器
 request.interceptors.response.use(
   (response) => {
-    if (response.data.code === 200) {
-      return Promise.resolve(response.data)
+    const res = response?.data
+    if (res && res.code === 200) {
+      return Promise.resolve(res)
     } else {
-      ElMessage.error(response.data.msg)
-      return Promise.reject(new Error(response.data.msg))
+      ElMessage.error(res?.msg || '请求失败')
+      return Promise.reject(new Error(res?.msg || '请求失败'))
     }
   },
   (error) => {
