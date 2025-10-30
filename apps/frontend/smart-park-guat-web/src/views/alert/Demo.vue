@@ -1,6 +1,6 @@
 <template>
   <div class="alert-wrapper" v-if="isVisible">
-    <n-alert type="error" :title="title">
+    <n-alert type="error" :title="title" closable @close="handleClose">
       <template #default>
         <n-marquee :loop="true" :speed="50" :delay="0">
           <template #default>
@@ -31,6 +31,20 @@ let timer: number | null = null
 let currentIndex = 0
 let alarms: Alarm[] = []
 
+// 映射
+const alarmTypeMap: Record<string, string> = {
+  over_current: '过流',
+  over_temp: '过温',
+  over_voltage: '过压',
+  offline: '离线',
+}
+
+const alarmLevelMap: Record<number, string> = {
+  0: '普通',
+  1: '严重',
+  2: '紧急',
+}
+
 const updateAlarmDisplay = (index: number) => {
   if (!alarms.length) {
     isVisible.value = false
@@ -44,8 +58,13 @@ const updateAlarmDisplay = (index: number) => {
   }
 
   const alarm = alarms[index]
+
+  // 使用映射表获取标签
+  const typeLabel = alarmTypeMap[alarm.alarmType] || alarm.alarmType
+  const levelLabel = alarmLevelMap[alarm.alarmLevel] || alarm.alarmLevel
+
   title.value = `设备ID: ${alarm.deviceId}`
-  content.value = `告警类型: ${alarm.alarmType} 等级: ${alarm.alarmLevel} 时间: ${alarm.alarmTime}`
+  content.value = `告警类型: ${typeLabel} ｜ 等级: ${levelLabel} ｜ 时间: ${alarm.alarmTime}`
 }
 
 onMounted(async () => {

@@ -34,8 +34,8 @@
 
       <el-table-column label="操作" align="center">
         <template #default="scope">
-          <el-button type="primary" link @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button type="danger" link @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="danger" link @click="handleEdit(scope.row)">编辑</el-button>
+          <!-- <el-button type="primary" link @click="handleDelete(scope.row)">删除</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -58,7 +58,7 @@
 <script setup>
 import Wrapper from '@/components/wrapper/index.vue'
 import { ref, onMounted } from 'vue'
-import { getAlarmList, saveOrUpdateAlarm, deleteAlarm } from '@/api/alert'
+import { getAlarmList, saveOrUpdateAlarm } from '@/api/alert'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const formRef = ref(null)
@@ -129,24 +129,24 @@ const handleEdit = (row) => {
 }
 
 /** 删除 */
-const handleDelete = (row) => {
-  ElMessageBox.confirm(`确定删除设备 ${row.deviceId} 的告警吗？`, '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning',
-  })
-    .then(async () => {
-      console.log('Deleting alarm for deviceId:', row.deviceId) // DEV-1001
-      const res = await deleteAlarm(row.deviceId)
-      if (res.code === 200) {
-        ElMessage.success('删除成功')
-        getData()
-      }
-    })
-    .catch(() => {
-      ElMessage.info('已取消删除')
-    })
-}
+// const handleDelete = (row) => {
+//   ElMessageBox.confirm(`确定删除设备 ${row.deviceId} 的告警吗？`, '提示', {
+//     confirmButtonText: '确定',
+//     cancelButtonText: '取消',
+//     type: 'warning',
+//   })
+//     .then(async () => {
+//       console.log('Deleting alarm for deviceId:', row.deviceId) // DEV-1001
+//       const res = await deleteAlarm(row.deviceId)
+//       if (res.code === 200) {
+//         ElMessage.success('删除成功')
+//         getData()
+//       }
+//     })
+//     .catch(() => {
+//       ElMessage.info('已取消删除')
+//     })
+// }
 
 onMounted(() => {
   getData()
