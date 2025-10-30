@@ -1,3 +1,6 @@
+// 后端跑路了
+// 只能自强了
+// fuck nodejs + express + cors😭
 import express from 'express'
 import cors from 'cors'
 const app = express()

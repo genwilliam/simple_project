@@ -4,54 +4,75 @@
       <template #default>
         <n-marquee :loop="true" :speed="50" :delay="0">
           <template #default>
-            <div style="margin-right: 64px">{{ content }}</div>
+            <div class="marquee-content">{{ content }}</div>
           </template>
         </n-marquee>
       </template>
     </n-alert>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { deviceId } from '@/api/alert'
+import { getAlarmList } from '@/api/alert'
+
+interface Alarm {
+  deviceId: string
+  alarmType: string
+  alarmLevel: number
+  alarmTime: string
+}
 
 const title = ref('ID加载中...')
 const content = ref('设备告警信息加载中...')
 const isVisible = ref(true)
-let timer = null
+let timer: number | null = null
 
-// 当前告警索引
 let currentIndex = 0
+let alarms: Alarm[] = []
+
+const updateAlarmDisplay = (index: number) => {
+  if (!alarms.length) {
+    isVisible.value = false
+    if (timer !== null) {
+      clearInterval(timer)
+      timer = null
+    }
+    title.value = ''
+    content.value = ''
+    return
+  }
+
+  const alarm = alarms[index]
+  title.value = `设备ID: ${alarm.deviceId}`
+  content.value = `告警类型: ${alarm.alarmType} 等级: ${alarm.alarmLevel} 时间: ${alarm.alarmTime}`
+}
 
 onMounted(async () => {
   try {
-    const res = await deviceId()
-    const alarms = res.data
+    const res = await getAlarmList()
+    if (res && res.code === 200 && res.data.length > 0) {
+      alarms = res.data
+      updateAlarmDisplay(0)
 
-    if (alarms && alarms.length > 0) {
-      title.value = `设备ID: ${alarms[0].deviceId}`
-      content.value = `告警类型: ${alarms[0].alarmType} 等级: ${alarms[0].alarmLevel} 时间: ${alarms[0].alarmTime}`
-
-      // 轮播
       timer = window.setInterval(() => {
         currentIndex = (currentIndex + 1) % alarms.length
-        const alarm = alarms[currentIndex]
-        title.value = `设备ID: ${alarm.deviceId}`
-        content.value = `告警类型: ${alarm.alarmType} 等级: ${alarm.alarmLevel} 时间: ${alarm.alarmTime}`
+        updateAlarmDisplay(currentIndex)
       }, 10000)
     } else {
-      console.warn('返回数据为空', alarms)
+      console.warn('告警列表为空', res.data)
       isVisible.value = false
     }
   } catch (error) {
-    console.error('获取 deviceId 出错', error)
+    console.error('获取告警列表出错', error)
     isVisible.value = false
-    title.value = '获取 deviceId 出错'
+    title.value = '获取告警列表出错'
+    content.value = ''
   }
 })
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer)
+  if (timer !== null) clearInterval(timer)
 })
 </script>
 
