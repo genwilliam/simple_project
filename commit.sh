@@ -13,6 +13,15 @@ echo "当前脚本解释器: $GET_SHELL"
 echo "登录默认 shell : $FALLBACK_SHELL"
 echo "----------------------"
 
+#  提交时远程有更改
+git stash save 'demo'
+
+# 默认 main 分支
+git pull origin main
+
+git stash pop
+echo "----------------------"
+
 # 获取简短状态
 status=$(git status --porcelain)
 
