@@ -17,10 +17,10 @@ public interface UserMapper {
     @Select("SELECT * FROM `charging_user`")
     public List<User> list();
 
-    @Insert("INSERT INTO `charging_user`(user_name,password,phone,email,sex,status) VALUES(#{userName},#{password},#{phoneNumber},#{email},#{sex},#{status})")
+    @Insert("INSERT INTO `charging_user`(user_name,password,phone,email,sex,status) VALUES(#{userName},#{password},#{phone},#{email},#{sex},#{status})")
     public Boolean add(User user);
 
-    @Update("UPDATE `charging_user` SET password=#{password},phone_number=#{phoneNumber},email=#{email},sex=#{sex},status=#{status} WHERE id=#{id}")
+    @Update("UPDATE `charging_user` SET password=#{password},phone=#{phone},email=#{email},sex=#{sex},status=#{status} WHERE id=#{id}")
     public Boolean edit(User user);
 
     @Delete("DELETE FROM `charging_user` WHERE id=#{id}")
