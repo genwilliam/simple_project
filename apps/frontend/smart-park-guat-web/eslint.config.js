@@ -39,14 +39,4 @@ export default defineConfig(
       },
     },
   },
-  // 后端配置
-  {
-    ignores,
-    files: ['apps/backend/**/*.{ts,js}'],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
-    },
-  },
 )

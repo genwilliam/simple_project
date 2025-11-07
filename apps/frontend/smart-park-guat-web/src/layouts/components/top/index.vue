@@ -24,7 +24,7 @@ import localeData from 'dayjs/plugin/localeData'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import 'dayjs/locale/zh-cn'
 import sequence from './sequence/index.vue'
-import Demo from '@/views/alert/charge-err.vue'
+import Demo from '@/layouts/components/alert/charge-alert.vue'
 dayjs.locale('zh-cn')
 
 const props = defineProps<{
