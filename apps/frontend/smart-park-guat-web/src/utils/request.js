@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ElMessage, ElLoading } from 'element-plus';
+import { ElMessage } from 'element-plus';
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
 // 创建axios实例

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
+    "@vicons/ionicons5": "^0.13.0",
     "axios": "^1.12.2",
     "cors": "^2.8.5",
     "dayjs": "^1.11.18",
@@ -49,6 +50,7 @@
     "prettier": "^3.6.2",
     "sass-embedded": "^1.93.2",
     "typescript": "~5.8.0",
+    "typescript-eslint": "^8.46.3",
     "vite": "^7.0.6",
     "vite-plugin-vue-devtools": "^8.0.0",
     "vue-tsc": "^3.0.4"
