@@ -92,15 +92,15 @@
   </Wrapper>
 </template>
 <script setup>
-import Wrapper from '@/components/wrapper/index.vue'
-import { ref, reactive, onMounted } from 'vue'
-import { getUserList, addUser, updateUser, deleteUser } from '@/api/user'
-import { ElMessage, ElMessageBox } from 'element-plus'
-const formRef = ref(null)
-const tableData = ref([])
-const title = ref('修改用户') //弹窗标题
-const open = ref(false) //弹窗显示隐藏
-const form = ref({}) //表单数据
+import Wrapper from '@/components/wrapper/index.vue';
+import { ref, reactive, onMounted } from 'vue';
+import { getUserList, addUser, updateUser, deleteUser } from '@/api/user';
+import { ElMessage, ElMessageBox } from 'element-plus';
+const formRef = ref(null);
+const tableData = ref([]);
+const title = ref('修改用户'); //弹窗标题
+const open = ref(false); //弹窗显示隐藏
+const form = ref({}); //表单数据
 const rules = reactive({
   //表单校验规则
   userName: [
@@ -121,54 +121,54 @@ const rules = reactive({
   ],
   sex: [{ required: true, message: '请选择性别', trigger: 'change' }],
   status: [{ required: true, message: '请选择状态', trigger: 'change' }],
-})
+});
 /**
  * 获取用户列表
  */
 const getData = () => {
   getUserList().then((res) => {
-    tableData.value = res.data
-  })
-}
+    tableData.value = res.data;
+  });
+};
 /**
  * 提交表单
  */
 const submitForm = () => {
-  if (!formRef.value) return
+  if (!formRef.value) return;
   formRef.value.validate((valid) => {
     if (valid) {
       if (form.value.id == undefined) {
         addUser(form.value).then((res) => {
-          ElMessage.success(res.data)
-          cancel()
-          getData()
-        })
+          ElMessage.success(res.data);
+          cancel();
+          getData();
+        });
       } else {
         updateUser(form.value).then((res) => {
-          ElMessage.success(res.data)
-          cancel()
-          getData()
-        })
+          ElMessage.success(res.data);
+          cancel();
+          getData();
+        });
       }
     }
-  })
-}
+  });
+};
 /**
  * 取消
  */
 const cancel = () => {
-  open.value = false
-  form.value = {}
-  formRef.value.resetFields()
-}
+  open.value = false;
+  form.value = {};
+  formRef.value.resetFields();
+};
 /**
  * 编辑
  * @param row 编辑行数据
  */
 const handleEdit = (row) => {
-  open.value = true
-  form.value = JSON.parse(JSON.stringify(row))
-}
+  open.value = true;
+  form.value = JSON.parse(JSON.stringify(row));
+};
 /**
  * 删除
  * @param row 删除行数据
@@ -180,15 +180,15 @@ const handleDelete = (row) => {
     type: 'warning',
   })
     .then(async () => {
-      const res = await deleteUser(row.id) //删除用户
-      ElMessage.success(res.data)
-      getData()
+      const res = await deleteUser(row.id); //删除用户
+      ElMessage.success(res.data);
+      getData();
     })
-    .catch(() => {})
-}
+    .catch(() => {});
+};
 onMounted(() => {
-  getData()
-})
+  getData();
+});
 </script>
 
 <style scoped>

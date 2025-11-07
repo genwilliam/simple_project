@@ -4,11 +4,11 @@
   </div>
 </template>
 <script setup>
-import { computed } from 'vue'
-import { useMenuStore } from '@/stores/menu'
-import MenuItem from './src/menu-item.vue'
-const menuStore = useMenuStore()
-const menuData = computed(() => menuStore.menuList)
+import { computed } from 'vue';
+import { useMenuStore } from '@/stores/menu';
+import MenuItem from './src/menu-item.vue';
+const menuStore = useMenuStore();
+const menuData = computed(() => menuStore.menuList);
 </script>
 
 <style scoped lang="scss">

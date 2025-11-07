@@ -10,8 +10,8 @@
   </el-container>
 </template>
 <script setup lang="ts">
-import Top from './components/top/index.vue'
-import Menu from './components/menu/index.vue'
+import Top from './components/top/index.vue';
+import Menu from './components/menu/index.vue';
 </script>
 
 <style scoped lang="scss">

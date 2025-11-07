@@ -1,12 +1,12 @@
 // 后端跑路了
 // 只能自强了
 // fuck nodejs + express + cors😭
-import express from 'express'
-import cors from 'cors'
-const app = express()
-const port = 3000
+import express from 'express';
+import cors from 'cors';
+const app = express();
+const port = 3000;
 
-app.use(cors())
+app.use(cors());
 // 定义接口
 app.get('/api/alarm', (req, res) => {
   const response = {
@@ -28,12 +28,12 @@ app.get('/api/alarm', (req, res) => {
         status: 0,
       },
     ],
-  }
+  };
 
-  res.json(response) // 返回 JSON
-})
+  res.json(response); // 返回 JSON
+});
 
 // 启动服务器
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`)
-})
+  console.log(`Server running at http://localhost:${port}`);
+});

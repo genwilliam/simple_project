@@ -25,4 +25,4 @@ export default {
   endOfLine: 'auto',
   rangeStart: 0,
   rangeEnd: Infinity,
-}
+};

@@ -18,43 +18,43 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
-import dayjs from 'dayjs'
-import localeData from 'dayjs/plugin/localeData'
-import updateLocale from 'dayjs/plugin/updateLocale'
-import 'dayjs/locale/zh-cn'
-import sequence from './sequence/index.vue'
-import Demo from '@/layouts/components/alert/charge-alert.vue'
-dayjs.locale('zh-cn')
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import dayjs from 'dayjs';
+import localeData from 'dayjs/plugin/localeData';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import 'dayjs/locale/zh-cn';
+import sequence from './sequence/index.vue';
+import Demo from '@/layouts/components/alert/charge-alert.vue';
+dayjs.locale('zh-cn');
 
 const props = defineProps<{
-  name: { type: String; default: string }['default']
-}>()
+  name: { type: String; default: string }['default'];
+}>();
 
-const currentTime = ref(dayjs().format('HH:mm:ss'))
-const currentDate = ref(dayjs().format('YYYY/MM/DD dddd'))
-const timer = ref<string | number | NodeJS.Timeout | undefined>(undefined)
+const currentTime = ref(dayjs().format('HH:mm:ss'));
+const currentDate = ref(dayjs().format('YYYY/MM/DD dddd'));
+const timer = ref<string | number | NodeJS.Timeout | undefined>(undefined);
 
 function updateTime() {
-  currentTime.value = dayjs().format('HH:mm:ss')
-  currentDate.value = dayjs().format('YYYY/MM/DD dddd')
+  currentTime.value = dayjs().format('HH:mm:ss');
+  currentDate.value = dayjs().format('YYYY/MM/DD dddd');
 }
 
 onMounted(() => {
-  updateTime()
-  timer.value = setInterval(updateTime, 1000)
-})
+  updateTime();
+  timer.value = setInterval(updateTime, 1000);
+});
 
 onBeforeUnmount(() => {
-  clearInterval(timer.value)
-})
+  clearInterval(timer.value);
+});
 
-dayjs.extend(localeData)
-dayjs.extend(updateLocale)
+dayjs.extend(localeData);
+dayjs.extend(updateLocale);
 
 dayjs.updateLocale('zh-cn', {
   weekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-})
+});
 </script>
 
 <style lang="scss" scoped>

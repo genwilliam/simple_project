@@ -11,7 +11,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-})
+});
 </script>
 
 <style scoped lang="scss">

@@ -1,12 +1,12 @@
-import { defineConfig } from 'eslint/config'
-import eslint from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import eslintPluginPrettier from 'eslint-plugin-prettier'
-import eslintPluginVue from 'eslint-plugin-vue'
-import globals from 'globals'
-import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import { defineConfig } from 'eslint/config';
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
+import eslintPluginVue from 'eslint-plugin-vue';
+import globals from 'globals';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
-const ignores = ['**/dist/**', '**/node_modules/**', '.*', 'scripts/**', '**/*.d.ts']
+const ignores = ['**/dist/**', '**/node_modules/**', '.*', 'scripts/**', '**/*.d.ts'];
 
 export default defineConfig(
   // 通用配置
@@ -39,4 +39,4 @@ export default defineConfig(
       },
     },
   },
-)
+);

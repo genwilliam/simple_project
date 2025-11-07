@@ -37,17 +37,17 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-import { login } from '@/api/login'
-import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
-const router = useRouter()
-const loginRef = ref(null)
+import { ref } from 'vue';
+import { login } from '@/api/login';
+import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus';
+const router = useRouter();
+const loginRef = ref(null);
 //表单数据
 const loginForm = ref({
   userName: 'admin',
   password: 'admin123',
-})
+});
 //表单验证
 const loginRules = {
   userName: [
@@ -64,23 +64,23 @@ const loginRules = {
       message: '请输入密码',
     },
   ],
-}
+};
 
 //登录
 const submitForm = async () => {
-  if (!loginRef.value) return
+  if (!loginRef.value) return;
   await loginRef.value.validate((valid) => {
     if (valid) {
       login(loginForm.value).then((res) => {
         if (res.code === 200) {
           //路由跳转到用户管理页面
-          ElMessage.success('登录成功')
-          router.push({ name: 'user' })
+          ElMessage.success('登录成功');
+          router.push({ name: 'user' });
         }
-      })
+      });
     }
-  })
-}
+  });
+};
 </script>
 
 <style scoped lang="scss">

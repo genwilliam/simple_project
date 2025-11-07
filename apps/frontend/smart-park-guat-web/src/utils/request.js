@@ -1,7 +1,7 @@
-import axios from 'axios'
-import { ElMessage, ElLoading } from 'element-plus'
+import axios from 'axios';
+import { ElMessage, ElLoading } from 'element-plus';
 
-axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
 // 创建axios实例
 const request = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
@@ -11,7 +11,7 @@ const request = axios.create({
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
   },
-})
+});
 // request拦截器
 request.interceptors.request.use(
   (config) => {
@@ -21,41 +21,41 @@ request.interceptors.request.use(
     // if (token) {
     //   config.headers['Authorization'] = 'Bearer ' + token
     // }
-    return config
+    return config;
   },
   (error) => Promise.reject(error),
-)
+);
 // response拦截器
 request.interceptors.response.use(
   (response) => {
-    const res = response?.data
+    const res = response?.data;
     if (res && res.code === 200) {
-      return Promise.resolve(res)
+      return Promise.resolve(res);
     } else {
-      ElMessage.error(res?.msg || '请求失败')
-      return Promise.reject(new Error(res?.msg || '请求失败'))
+      ElMessage.error(res?.msg || '请求失败');
+      return Promise.reject(new Error(res?.msg || '请求失败'));
     }
   },
   (error) => {
-    ElMessage.error(error.message || '请求失败')
-    return Promise.reject(error)
+    ElMessage.error(error.message || '请求失败');
+    return Promise.reject(error);
   },
-)
+);
 
 // 封装请求方法
 const http = {
   get(url, params = {}) {
-    return request.get(url, { params })
+    return request.get(url, { params });
   },
   post(url, data = {}) {
-    return request.post(url, data)
+    return request.post(url, data);
   },
   put(url, data = {}) {
-    return request.put(url, data)
+    return request.put(url, data);
   },
   delete(url, data = {}) {
-    return request.delete(url, { data })
+    return request.delete(url, { data });
   },
-}
+};
 
-export default http
+export default http;

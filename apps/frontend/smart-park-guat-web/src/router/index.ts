@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Layout from '@/layouts/index.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Layout from '@/layouts/index.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_APP_BASE_URL),
   routes: [
@@ -36,6 +36,6 @@ const router = createRouter({
       },
     },
   ],
-})
+});
 
-export default router
+export default router;
