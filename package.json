@@ -43,5 +43,8 @@
 		"globals": "^16.4.0",
 		"prettier": "^3.6.2",
 		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"@vicons/ionicons5": "^0.13.0"
 	}
 }
