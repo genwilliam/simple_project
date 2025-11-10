@@ -1,5 +1,6 @@
 package cn.guat.smartpark.service;
 
+
 import cn.guat.smartpark.entity.ChargingRealtime;
 import cn.guat.smartpark.mapper.ChargingRealtimeMapper;
 import cn.guat.smartpark.common.TcpDeviceClient;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 @Service
 public class DataCollectorService {

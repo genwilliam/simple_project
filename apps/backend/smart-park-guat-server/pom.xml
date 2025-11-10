@@ -71,6 +71,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <!-- 依赖管理配置，用于统一管理依赖版本 -->

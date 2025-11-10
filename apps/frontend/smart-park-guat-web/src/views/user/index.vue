@@ -5,12 +5,12 @@
     </template>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="userName" label="用户名称" align="center" />
-      <el-table-column prop="phoneNumber" label="手机号码" align="center" />
+      <el-table-column prop="phone" label="手机号码" align="center" />
       <el-table-column prop="email" label="邮箱" align="center" />
       <el-table-column prop="sex" label="性别" align="center">
         <template #default="scope">
           <el-tag type="primary" v-if="scope.row.sex === 1">男</el-tag>
-          <el-tag type="danger" v-if="scope.row.sex === 0">女</el-tag>
+          <el-tag type="danger" v-if="scope.row.sex === 2">女</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" align="center">
@@ -55,8 +55,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="手机号码" prop="phoneNumber">
-              <el-input v-model="form.phoneNumber" placeholder="请输入手机号码" maxlength="11" />
+            <el-form-item label="手机号码" prop="phone">
+              <el-input v-model="form.phone" placeholder="请输入手机号码" maxlength="11" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -111,7 +111,7 @@ const rules = reactive({
     { required: true, message: '请输入用户密码', trigger: 'blur' },
     { min: 5, max: 20, message: '用户密码长度在5到20个字符之间', trigger: 'blur' },
   ],
-  phoneNumber: [
+  phone: [
     { required: true, message: '请输入手机号码', trigger: 'blur' },
     { pattern: /^1[3-9]\d{9}$/, message: '手机号码格式不正确', trigger: 'blur' },
   ],

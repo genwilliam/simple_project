@@ -1,5 +1,6 @@
 package cn.guat.smartpark.service;
 
+
 import cn.guat.smartpark.entity.ChargingAlarm;
 import cn.guat.smartpark.mapper.ChargingAlarmMapper;
 import org.springframework.beans.factory.annotation.Autowired;

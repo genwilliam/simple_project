@@ -1,9 +1,9 @@
 package cn.guat.smartpark.service;
 
+
 import cn.guat.smartpark.entity.User;
 import cn.guat.smartpark.mapper.UserMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.List;
  * 用户服务类
  * 提供用户相关业务逻辑处理
  */
+
 @Service
 public class UserService {
 

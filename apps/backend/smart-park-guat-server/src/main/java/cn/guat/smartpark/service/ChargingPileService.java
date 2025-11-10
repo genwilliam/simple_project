@@ -1,5 +1,6 @@
 package cn.guat.smartpark.service;
 
+
 import cn.guat.smartpark.entity.ChargingRealtime;
 import cn.guat.smartpark.mapper.ChargingRealtimeMapper;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.List;
  * 充电桩服务类
  * 提供充电桩的实时数据查询
  */
+
 @Service
 public class ChargingPileService {
     @Resource
