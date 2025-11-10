@@ -64,6 +64,18 @@ public class R<T> {
         return r;
     }
 
+
+    /**
+     * 创建一个表示成功的响应结果，可自定义消息
+     * @param msg
+     * @return
+     * @param <T>
+     */
+    public static <T> R success(String msg) {
+        R r = new R(200,msg, null);
+        return r;
+    }
+
     /**
      * 创建一个表示错误的响应结果
      *

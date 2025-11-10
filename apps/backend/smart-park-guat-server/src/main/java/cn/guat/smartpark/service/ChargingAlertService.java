@@ -1,6 +1,7 @@
 package cn.guat.smartpark.service;
 
 import cn.guat.smartpark.common.AlarmLevelEnum;
+
 import cn.guat.smartpark.config.AlertThresholdConfig;
 import cn.guat.smartpark.dto.AlarmListDto;
 import cn.guat.smartpark.entity.ChargingAlarm;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 /**
  * 充电桩异常告警服务类
  */
+
 @Service
 public class ChargingAlertService {
 
@@ -76,7 +78,7 @@ public class ChargingAlertService {
         Date now = new Date();
         long diffMills = now.getTime() - collectTimeDate.getTime();
         long minutesDiff = diffMills / (1000 * 60);
-        if ((minutesDiff / (1000*60)) > alertThresholdConfig.getOffLineMinutes()){
+        if ((minutesDiff ) > alertThresholdConfig.getOffLineMinutes()){
             chargingAlertHandlerService.triggerAlert(
                     deviceID,
                     "offline",

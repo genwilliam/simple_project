@@ -1,5 +1,6 @@
 package cn.guat.smartpark.service;
 
+
 import cn.guat.smartpark.mapper.AlarmMapper;
 import com.alibaba.fastjson2.JSONObject;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import java.util.List;
  * 告警服务类
  * 提供告警相关的业务逻辑处理
  */
+
+
 @Service
 public class AlarmService {
     @Resource
