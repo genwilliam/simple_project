@@ -38,7 +38,7 @@ public class DataCollectorService {
      * 定时采集任务（每30秒执行一次）
      * 替代原有串行逻辑，采用并行处理提升效率
      */
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 60000)
     public void collectOnce() {
         long totalStart = System.currentTimeMillis();
         log.info("开始采集{}台设备数据", deviceList.size());
@@ -82,7 +82,7 @@ public class DataCollectorService {
 
         // 统一当前时间（采集时间、创建时间、更新时间保持一致）
         Date now = new Date();
-        record.setCollectTime(now);
+        record.setCollectTime(now);  // 采集时间
         record.setCreateTime(now);
         record.setUpdateTime(now);
 
@@ -111,7 +111,7 @@ public class DataCollectorService {
     }
 
     /**
-     * 查询最近采集的20条数据（供前端展示）
+     * 查询最近采集的15条数据（供前端展示）
      */
     public List<ChargingRealtime> listRecent() {
         return realtimeMapper.findRecent();
