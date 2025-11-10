@@ -10,7 +10,7 @@
       <el-table-column prop="sex" label="性别" align="center">
         <template #default="scope">
           <el-tag type="primary" v-if="scope.row.sex === 1">男</el-tag>
-          <el-tag type="danger" v-if="scope.row.sex === 0">女</el-tag>
+          <el-tag type="danger" v-if="scope.row.sex === 2">女</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" align="center">

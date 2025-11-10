@@ -104,10 +104,23 @@ public class ChargingAlertService {
     /**
      * 更新充电桩告警信息
      *
-     * @param chargingAlarm
+     * @param alarmListDto
      */
-    public void updateSelective(ChargingAlarm chargingAlarm) {
-        chargingAlarmMapper.updateSelective(chargingAlarm);
+    public void updateSelective(AlarmListDto alarmListDto) {
+        // 关键：将前端传递的中文告警等级转换为整数
+        if (alarmListDto.getAlarmLevel() != null) {
+            String levelStr = alarmListDto.getAlarmLevel();
+            Integer levelCode = null;
+            if ("普通".equals(levelStr)) {
+                levelCode = AlarmLevelEnum.NORMAL.getCode(); // 1
+            } else if ("严重".equals(levelStr)) {
+                levelCode = AlarmLevelEnum.SERIOUS.getCode(); // 2
+            } else {
+                throw new IllegalArgumentException("无效的告警等级：" + levelStr);
+            }
+            alarmListDto.setAlarmLevelCode(levelCode); // 新增字段用于传递int值
+        }
+        chargingAlarmMapper.updateSelective(alarmListDto);
     }
 
     /**
