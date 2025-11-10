@@ -26,7 +26,7 @@ public class DataCollectorController {
      * 接口说明：通过POST请求触发单次数据采集，调用服务层的采集方法
      * @return 字符串提示信息，返回"数据采集完成！"表示采集操作执行完毕
      */
-    @PostMapping("/run") // 接口路径：/api/collector/run，接收POST请求
+    @PostMapping("run") // 接口路径：/api/collector/run，接收POST请求
     public String runCollect() {
         collectorService.collectOnce(); // 调用服务层方法执行一次采集
         return "数据采集完成！";
@@ -37,9 +37,10 @@ public class DataCollectorController {
      * 接口说明：通过GET请求获取最近采集到的实时充电数据列表
      * @return 实时充电数据列表（List<ChargingRealtime>），包含最近采集的结果信息
      */
-    @GetMapping("/list") // 接口路径：/api/collector/list，接收GET请求
+    @GetMapping("list") // 接口路径：/api/collector/list，接收GET请求
     public List<ChargingRealtime> listRecent() {
         // 调用服务层方法获取最近采集结果并返回
         return collectorService.listRecent();
     }
 }
+

@@ -53,3 +53,4 @@ turbo/
 .cache/
 
 ./apps/backend/smart-park-guat-server/src/main/resources/application.yml
+/apps/backend/smart-park-guat-server/src/main/resources/mapper/ChargingRealtimeMapper.xml
