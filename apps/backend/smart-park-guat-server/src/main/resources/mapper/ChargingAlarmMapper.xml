@@ -3,32 +3,11 @@
 <mapper namespace="cn.guat.smartpark.mapper.ChargingAlarmMapper" >
 
 
-    <update id="updateSelective" parameterType="cn.guat.smartpark.entity.ChargingAlarm">
+    <update id="updateSelective" parameterType="cn.guat.smartpark.dto.AlarmListDto">
         update charging_alarm
         <set>
-            <if test="id !=null">
-                id = #{id},
-            </if>
-            <if test="deviceId !=null">
-                device_id = #{deviceId},
-            </if>
-            <if test="alarmValue !=null">
-                alarm_value = #{alarmValue},
-            </if>
-            <if test=" threshold !=null">
-                threshold = #{threshold},
-            </if>
-            <if test="handler !=null">
-                handler = #{handler},
-            </if>
-            <if test="mark !=null">
-                mark = #{mark},
-            </if>
-            <if test="createTime !=null">
-                create_time = #{createTime},
-            </if>
-            <if test="alarmLevel != null">
-                alarm_level = #{alarmLevel},
+            <if test="alarmLevelCode  != null">
+                alarm_level = #{alarmLevelCode},
             </if>
             <if test="alarmTime != null">
                 alarm_time = #{alarmTime},
@@ -37,7 +16,7 @@
                 alarm_type = #{alarmType},
             </if>
             <if test="status !=null">
-                status = #{status},
+                status = #{status}
             </if>
             where id = #{id}
         </set>

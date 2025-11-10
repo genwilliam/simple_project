@@ -31,8 +31,8 @@ public class ChargingAlertController {
      * 更新充电桩告警信息
      */
     @PostMapping("/update")
-    public R updateSelective(@RequestBody ChargingAlarm chargingAlarm) {
-        chargingAlertService.updateSelective(chargingAlarm);
+    public R updateSelective(@RequestBody AlarmListDto alarmListDto) {
+        chargingAlertService.updateSelective(alarmListDto);
         return R.success();
     }
 

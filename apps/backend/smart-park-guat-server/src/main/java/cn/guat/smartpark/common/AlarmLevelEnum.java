@@ -1,8 +1,9 @@
 package cn.guat.smartpark.common;
 
 
+import lombok.Getter;
 
-
+@Getter
 public enum AlarmLevelEnum {
     NORMAL(1, "普通"),
     SERIOUS(2, "严重");
@@ -26,4 +27,5 @@ public enum AlarmLevelEnum {
         }
         return "未知级别"; // 处理未匹配的编码
     }
+
 }

@@ -1,5 +1,6 @@
 package cn.guat.smartpark.mapper;
 
+import cn.guat.smartpark.dto.AlarmListDto;
 import cn.guat.smartpark.entity.ChargingAlarm;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,9 +28,9 @@ public interface ChargingAlarmMapper {
 
     /**
      * 更新充电桩告警信息,可选的动态修改
-     * @param chargingAlarm
+     * @param alarmListDto
      */
-   void updateSelective(ChargingAlarm chargingAlarm);
+   void updateSelective(AlarmListDto alarmListDto);
 
    /**
      * 获取未处理的告警

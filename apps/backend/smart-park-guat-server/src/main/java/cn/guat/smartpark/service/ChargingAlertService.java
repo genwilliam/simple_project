@@ -1,6 +1,7 @@
 package cn.guat.smartpark.service;
 
 import cn.guat.smartpark.common.AlarmLevelEnum;
+
 import cn.guat.smartpark.config.AlertThresholdConfig;
 import cn.guat.smartpark.dto.AlarmListDto;
 import cn.guat.smartpark.entity.ChargingAlarm;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 /**
  * 充电桩异常告警服务类
  */
+
 @Service
 public class ChargingAlertService {
 
@@ -76,7 +78,7 @@ public class ChargingAlertService {
         Date now = new Date();
         long diffMills = now.getTime() - collectTimeDate.getTime();
         long minutesDiff = diffMills / (1000 * 60);
-        if ((minutesDiff / (1000*60)) > alertThresholdConfig.getOffLineMinutes()){
+        if ((minutesDiff ) > alertThresholdConfig.getOffLineMinutes()){
             chargingAlertHandlerService.triggerAlert(
                     deviceID,
                     "offline",
@@ -102,10 +104,23 @@ public class ChargingAlertService {
     /**
      * 更新充电桩告警信息
      *
-     * @param chargingAlarm
+     * @param alarmListDto
      */
-    public void updateSelective(ChargingAlarm chargingAlarm) {
-        chargingAlarmMapper.updateSelective(chargingAlarm);
+    public void updateSelective(AlarmListDto alarmListDto) {
+        // 关键：将前端传递的中文告警等级转换为整数
+        if (alarmListDto.getAlarmLevel() != null) {
+            String levelStr = alarmListDto.getAlarmLevel();
+            Integer levelCode = null;
+            if ("普通".equals(levelStr)) {
+                levelCode = AlarmLevelEnum.NORMAL.getCode(); // 1
+            } else if ("严重".equals(levelStr)) {
+                levelCode = AlarmLevelEnum.SERIOUS.getCode(); // 2
+            } else {
+                throw new IllegalArgumentException("无效的告警等级：" + levelStr);
+            }
+            alarmListDto.setAlarmLevelCode(levelCode); // 新增字段用于传递int值
+        }
+        chargingAlarmMapper.updateSelective(alarmListDto);
     }
 
     /**
