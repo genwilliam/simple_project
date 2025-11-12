@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.guat.smartpark.mapper.ChargingRealtimeMapper" >
+
+    <!-- 批量插入充电实时数据 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO charging_realtime(device_id,status,voltage,current,power,temperature, collect_time,create_time,update_time) VALUES
+        <foreach collection="list" item="item" separator=",">
+            ( #{item.deviceId}, #{item.status},#{item.voltage}, #{item.current}, #{item.power},#{item.temperature},#{item.collectTime},#{item.createTime}, #{item.updateTime})
+        </foreach>
+    </insert>
+
+    <!-- 查询最近15条数据 -->
+    <select id="findRecent" resultType="cn.guat.smartpark.entity.ChargingRealtime">
+        SELECT * FROM charging_realtime
+        ORDER BY collect_time DESC
+            LIMIT 15
+    </select>
+
+    <!-- 查询所有数据 -->
+    <select id="findAll" resultType="cn.guat.smartpark.entity.ChargingRealtime">
+        SELECT * FROM charging_realtime
+    </select>
+
+    <!-- 根据ID查询数据 -->
+    <select id="findById" parameterType="java.lang.Long" resultType="cn.guat.smartpark.entity.ChargingRealtime">
+        SELECT * FROM charging_realtime
+        WHERE id = #{id}
+    </select>
+
+</mapper>
