@@ -18,7 +18,13 @@ public class TcpDeviceClient {
     /** 空闲状态固定电压（V） */
     private static final double IDLE_VOLTAGE = 220.0;
     /** 空闲状态固定电流（A，无充电时为0） */
-    private static final double IDLE_CURRENT = 0.0;
+    private static final int IDLE_CURRENT = 0;
+    /** 故障状态下的过压起始值（V），基于过压阈值300V */
+    private static final double OVER_VOLTAGE_START = 300.0;
+    /** 故障状态下的过流起始值（A），基于过流阈值50A */
+    private static final double OVER_CURRENT_START = 50.0;
+    /** 故障状态下的过温起始值（℃），基于过温阈值60℃ */
+    private static final double OVER_TEMP_START = 60.0;
 
 
     /**
@@ -69,21 +75,33 @@ public class TcpDeviceClient {
             DeviceData data = new DeviceData();
             data.setDeviceId(deviceId);
             data.setVoltage(220 + RAND.nextDouble() * 10); // 220-230V（正常）
-            data.setCurrent(5 + RAND.nextDouble() * 10);   // 5-15A（充电电流）
+            data.setCurrent(5 + RAND.nextDouble() * 10);   // 5-15A（充电电流，远低于过流阈值）
             data.setPower(data.getVoltage() * data.getCurrent() / 1000); // 正常功率
-            data.setTemperature(28 + RAND.nextDouble() * 7); // 28-35℃（充电温升）
+            data.setTemperature(28 + RAND.nextDouble() * 7); // 28-35℃（正常温度，远低于过温阈值）
             data.setStatus(1); // 状态1：充电中
             return data;
         }
 
-        // 状态2：故障（异常数据）
+        // 状态2：故障（异常数据，基于阈值生成合理故障值）
         DeviceData faultData = new DeviceData();
         faultData.setDeviceId(deviceId);
-        // 电压异常（低于200V或高于250V）
-        faultData.setVoltage(RAND.nextBoolean() ? 180 + RAND.nextDouble() * 20 : 250 + RAND.nextDouble() * 20);
-        faultData.setCurrent(0.0); // 故障时无充电电流
-        faultData.setPower(0.0); // 无功率输出
-        faultData.setTemperature(40 + RAND.nextDouble() * 10); // 40-50℃（过热）
+
+        // 电压异常：随机生成欠压（<200V）或过压（>300V）
+        faultData.setVoltage(RAND.nextBoolean()
+                ? 160 + RAND.nextDouble() * 40  // 欠压：160-200V
+                : OVER_VOLTAGE_START + RAND.nextDouble() * 50); // 过压：300-350V
+
+        // 电流异常：随机生成0A（无输出）或过流（>50A），覆盖过流阈值场景
+        faultData.setCurrent(RAND.nextBoolean()
+                ? 0.0  // 无电流输出
+                : OVER_CURRENT_START + RAND.nextDouble() * 20); // 过流：50-70A（超过过流阈值）
+
+        // 功率：根据电压和电流计算（故障时可能为0或异常高值）
+        faultData.setPower(faultData.getVoltage() * faultData.getCurrent() / 1000);
+
+        // 温度异常：生成超过60℃的过温数据（覆盖过温阈值）
+        faultData.setTemperature(OVER_TEMP_START + RAND.nextDouble() * 20); // 60-80℃（超过过温阈值）
+
         faultData.setStatus(2); // 状态2：故障
         return faultData;
     }
