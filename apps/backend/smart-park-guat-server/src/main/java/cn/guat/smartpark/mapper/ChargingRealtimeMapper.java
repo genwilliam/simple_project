@@ -24,12 +24,14 @@ public interface ChargingRealtimeMapper {
      * 按数据采集时间（collect_time）降序排列，默认返回最近的20条记录
      * @return 最近采集的充电实时数据列表（List<ChargingRealtime>）
      */
+    @Select("select * from charging_realtime order by collect_time desc limit 15")
     List<ChargingRealtime> findRecent();
 
     /**
      * 查询所有充电实时数据
      * @return 所有充电实时数据列表（List<ChargingRealtime>）
      */
+    @Select("select * from charging_realtime")
     List<ChargingRealtime> findAll();
 
     /**
@@ -37,6 +39,7 @@ public interface ChargingRealtimeMapper {
      * @param id 充电实时数据ID
      * @return 匹配的充电实时数据对象（ChargingRealtime），如果不存在则返回null
      */
+    @Select("select * from charging_realtime where id = #{id}")
     ChargingRealtime findById(Long id);
 }
 

@@ -7,7 +7,6 @@ import lombok.Data;
  * 告警实体类
  * 用于表示系统中的告警信息
  */
-
 @Data
 public class Alarm {
 

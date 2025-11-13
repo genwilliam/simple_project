@@ -7,6 +7,8 @@ import cn.guat.smartpark.dto.AlarmListDto;
 import cn.guat.smartpark.entity.ChargingAlarm;
 import cn.guat.smartpark.entity.ChargingRealtime;
 import cn.guat.smartpark.mapper.ChargingAlarmMapper;
+import cn.guat.smartpark.mapper.ChargingRealtimeMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,26 +25,34 @@ import java.util.stream.Collectors;
 /**
  * 充电桩异常告警服务类
  */
-
+@Slf4j
 @Service
 public class ChargingAlertService {
 
     @Resource
     private ChargingAlarmMapper chargingAlarmMapper;
     @Autowired
-    private ChargingPileService chargingPileService;
+    private ChargingRealtimeMapper chargingRealtimeMapper;
     @Autowired
     private AlertThresholdConfig alertThresholdConfig;
     @Autowired
     private ChargingAlertHandlerService chargingAlertHandlerService;;
 
 
-    //定时任务,每三十秒执行一次检测
-    @Scheduled(fixedRate = 60000)
+    //定时任务,每分钟执行一次检测
+    @Scheduled(fixedRate = 30000)
     public void detectAbnormal() {
-        List<ChargingRealtime> allPileData = chargingPileService.getAllPileData();
+        List<ChargingRealtime> allPileData = chargingRealtimeMapper.findRecent();
+        if (allPileData == null || allPileData.isEmpty()) {
+            log.info("检测异常充电桩功能：当前无充电桩数据，跳过检测");
+            return;
+        }
         for (ChargingRealtime pile : allPileData){
-            checkAndHandlerAlert(pile);
+            try {
+                checkAndHandlerAlert(pile);
+            } catch (RuntimeException e) {
+                log.warn("充电桩数据处理异常：{}", e.getMessage(), e);
+            }
         }
     }
 
@@ -50,7 +60,10 @@ public class ChargingAlertService {
         //获取设备id
         String deviceID = charge.getDeviceId();
         //1.检测过压
-        if (charge.getVoltage() != null && charge.getVoltage().compareTo(alertThresholdConfig.getMaxVoltage()) > 0) {
+        if (charge.getVoltage() == null){
+            throw  new RuntimeException("电压数据为空,无法检测");
+        }
+        if (charge.getVoltage().compareTo(alertThresholdConfig.getMaxVoltage()) > 0) {
             chargingAlertHandlerService.triggerAlert(
                     deviceID,
                     "over_voltage",
@@ -58,7 +71,10 @@ public class ChargingAlertService {
                     alertThresholdConfig.getMaxVoltage());
             }
         //2.检测过流
-        if(charge.getCurrent() != null && charge.getCurrent().compareTo(alertThresholdConfig.getMaxCurrent()) > 0){
+        if(charge.getCurrent() == null ){
+            throw new RuntimeException("电流数据为空,无法检测");
+        }
+        if(charge.getCurrent().compareTo(alertThresholdConfig.getMaxCurrent()) > 0){
             chargingAlertHandlerService.triggerAlert(
                     deviceID,
                     "over_current",
@@ -66,7 +82,10 @@ public class ChargingAlertService {
                     alertThresholdConfig.getMaxCurrent());
         }
         //3.检测过温
-        if (charge.getTemperature() != null && charge.getTemperature().compareTo(alertThresholdConfig.getMaxTemperature()) > 0){
+        if (charge.getTemperature() == null){
+            throw new RuntimeException("温度数据为空,无法检测");
+        }
+        if (charge.getTemperature().compareTo(alertThresholdConfig.getMaxTemperature()) > 0){
             chargingAlertHandlerService.triggerAlert(
                     deviceID,
                     "over_temp",
