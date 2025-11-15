@@ -3,6 +3,7 @@ package cn.guat.smartpark.service;
 
 import cn.guat.smartpark.entity.ChargingAlarm;
 import cn.guat.smartpark.mapper.ChargingAlarmMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
+@Slf4j
 @Service
 public class ChargingAlertHandlerService {
 
@@ -31,7 +32,7 @@ public class ChargingAlertHandlerService {
             return;
         }
 
-        System.out.println("已触发告警"+alertType);
+        log.info("触发告警:设备ID={},告警类型={},告警值={},阈值={}",deviceID,alertType,alertValue,threshold);
         //2.记录告警到数据库
         ChargingAlarm chargingAlarm = new ChargingAlarm();
         chargingAlarm.setDeviceId(deviceID);

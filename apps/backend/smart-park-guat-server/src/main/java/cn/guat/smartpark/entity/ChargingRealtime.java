@@ -6,10 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * 充电桩实时数据表
- * @TableName charging_realtime
- */
+
 @Data
 public class ChargingRealtime {
     /**

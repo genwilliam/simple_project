@@ -2,12 +2,11 @@ package cn.guat.smartpark.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 import lombok.Data;
 
-/**
- * 充电桩历史数据表
- * @TableName charging_alarm
- */
+
+
 @Data
 public class ChargingAlarm {
     /**
